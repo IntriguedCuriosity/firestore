@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <script src="https://gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+        <script src="https://gstatic.com/firebasejs/5.0.4/firebase-firestore.js"></script>
+        //firebase.js and firestore.js packages will load all the package needed at the very start
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+
+        <h1>fomada</h1>
+
+        <div class="content">
+
+            <form id="add-cafe-form"></form>
+
+            <ul id="cafe-list"></ul>
+
+        </div>
+        <script>
+            //we are creating an object which is storing which project are we hooking up with
+            //just linking with firebase
+            var config = {
+            apiKey: "AIzaSyCbG5ZdjCaXNs9hjE4yLQvlmU7F6Xa21WY",
+            authDomain: "burnished-sweep-336016.firebaseapp.com",
+            projectId: "burnished-sweep-336016",
+            storageBucket: "burnished-sweep-336016.appspot.com",
+            messagingSenderId: "672563252759",
+            appId: "1:672563252759:web:de0c00bfaae50c75fa1652"
+            };
+            firebase.initializeApp(config);
+            //to get a reference to our db we will initialize the firestore object
+            const db = firebase.firestore();
+            //now whenever in the entire project we would like to talk with db, we can use the cosntant db
+            //snapShots are as we will pe pulling the latest snapshot of the db everytime we retreive the data from firebase/store
+            db.settings({timestampsInSnapshots: true})
+        </script>
+        <script src="app.js"></script>
+    </body>
+</html>
