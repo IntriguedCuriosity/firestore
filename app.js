@@ -1,26 +1,55 @@
-//step1 - grab the data we have it in our firebase database
-//we have already defined the db constant in index.html
-//format is db.collection('the collection you have defined in the db').get()
+<html>
+    <head>
+        <script src="https://gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+        <script src="https://gstatic.com/firebasejs/5.0.4/firebase-firestore.js"></script>
+        <!--firebase.js and firestore.js packages will load all the package needed at the very start-->
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
 
-// but it is an asychrnouse request cause a great architecture is always loosely coupled
-//we cannot initialize it in a variable because maybe the data would still have not persisted in our db
-//hence we add another function then() and provide the parameter snapshot which will capture the current data in db
-//snapshot is nothing but a representation of data what we have in our DB
+        <h1>fomada</h1>
 
-// db.collection('fomada').get().then((snapshot) => {
-//      console.log(snapshot.docs);
-  
-// }).catch((err) => {
-    //dummy
-// });
+        <div class="content">
 
-//the above code will extract only the amount of content there but not the data
-//=> callback function is a function which gets passed as an argument to a function
+            <form id="add-clients-form">
+                <!-- will need all the input fields which we have to feed inside the documnet list
+                whatever we type here is going to get printed on the screen
+            
+                format will be the type + name + placeholder   <input type="" name="" placeholder="">-->
+                <input type="text" name="email" placeholder="e-mail">
+                <input type="text" name="password" placeholder="provide password">
+                <input type="text" name="role" placeholder="your role">
+                <input type="number" name="phone" placeholder="cell# for MFA">
+                <!--now to submit all above data we will need to add a button-->
+                <button>Add client Details</button>
+                <!--this above entire tag will have a reference in app.js, to populate the values and store it inside noSQL-->
+            </form>
+            <!-- below ul is the place where we would want to list down all the client details
+            remember this index.html is the page which we will show on the webist
+            and every tag can be linked to code which will do things the back end and show the results on screen-->>
 
+            <ul id="client-list"></ul>
 
-db.collection('fomada').get().then((snapshot) => {
-    snapshot.docs.forEach(doc => {
+        </div>
+        <script>
+            //we are creating an object which is storing which project are we hooking up with
+            //just linking with firebase
+            var config = {
+            apiKey: "AIzaSyCbG5ZdjCaXNs9hjE4yLQvlmU7F6Xa21WY",
+            authDomain: "burnished-sweep-336016.firebaseapp.com",
+            projectId: "burnished-sweep-336016",
+            storageBucket: "burnished-sweep-336016.appspot.com",
+            messagingSenderId: "672563252759",
+            appId: "1:672563252759:web:de0c00bfaae50c75fa1652"
+            };
+            firebase.initializeApp(config);
+            //to get a reference to our db we will initialize the firestore object
+            const db = firebase.firestore();
+            //now whenever in the entire project we would like to talk with db, we can use the cosntant db
+            //snapShots are as we will pe pulling the latest snapshot of the db everytime we retreive the data from firebase/store
+            db.settings({timestampsInSnapshots: true})
+        </script>
+        <script src="app.js"></script>
+    </body>
+</html>
 
-        console.log(doc.data());    
-    })
-})
